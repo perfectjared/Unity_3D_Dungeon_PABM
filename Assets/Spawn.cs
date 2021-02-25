@@ -13,6 +13,7 @@ public class Spawn : MonoBehaviour {
 
     [Range(0, 100)]
     public int step;
+    public bool wait;
 
     public SpawnTypes spawnType;
 
@@ -37,7 +38,11 @@ public class SpawnEditor : Editor {
         
         spawn.agentPf = (GameObject)EditorGUILayout.ObjectField("Agent Prefab", spawn.agentPf, typeof(GameObject), false);
         spawn.layerMask = EditorGUILayout.LayerField("Layer Mask", spawn.layerMask);
-
+        spawn.iterations = EditorGUILayout.IntSlider("Iterations", spawn.iterations, 0, 100);
+        spawn.step = EditorGUILayout.IntSlider("Step", spawn.step, 1, 100);
+        spawn.wait = EditorGUILayout.Toggle("Wait", spawn.wait);
+        spawn.spawnType = (Spawn.SpawnTypes)EditorGUILayout.EnumPopup("Spawn Type", spawn.spawnType);
+        if (spawn.spawnType != Spawn.SpawnTypes.Random) spawn.point = EditorGUILayout.Vector3IntField("Spawn Point", spawn.point);
 
         serializedObject.Update();
         serializedObject.ApplyModifiedProperties();
