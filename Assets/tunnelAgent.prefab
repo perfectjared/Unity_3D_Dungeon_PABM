@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overlap: 0
-  life: 84
+  life: 77
   distMod: 2
-  xzChance: 0.9
+  xzChance: 0.85
   xzDist:
     serializedVersion: 2
     m_Curve:
@@ -134,7 +134,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   xzDistFloor: 2
   xzDistCeil: 6
-  yChance: 0.1
+  yChance: 0.15
   yDist:
     serializedVersion: 2
     m_Curve:
@@ -161,12 +161,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   yDistFloor: 2
   yDistCeil: 2
-  instantiatePf: {fileID: 5566055300717348028, guid: 074b70365767ff04093789572e49d67d,
+  instantiatePf: {fileID: 6431894780918834992, guid: 9e6a468f28dbea44ca85cb17bc9bd429,
     type: 3}
   reproduceChance: 0.05
   reproduceSameLife: 0
   children: 0
-  reproducePf: {fileID: 1918271134943400004, guid: 76acfc8463b3045dca6a2f3b590aec77,
+  reproducePf: {fileID: 8215539638987332033, guid: 23b13fcb62bf11a41b173ca4b7051076,
     type: 3}
   alive: 1
   id: 0

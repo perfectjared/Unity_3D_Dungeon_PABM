@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ABMU.Core;
 
-public class Tunnel : MonoBehaviour
+public class Node : MonoBehaviour
 {
     [HideInInspector]
     public Cell cellOrigin;
@@ -19,7 +19,7 @@ public class Tunnel : MonoBehaviour
 
     public void Init(Cell cell, AgentUtilities.Dir dir) {
         //base.Init();
-        this.cellOrigin = cellOrigin;
+        this.cellOrigin = cell;
         this.cells = cell.GetCellNeighbors(size);
         this.dir = dir;
         cell.occupied = true;

@@ -60,7 +60,7 @@ public class Agent : AbstractAgent
     [HideInInspector]
     public GameObject pathParent;
     [HideInInspector]
-    public List<Tunnel> path;
+    public List<Node> path;
 
     [HideInInspector]
     public Cell currentCell;
@@ -109,7 +109,8 @@ public class Agent : AbstractAgent
         if (reproduce <= reproduceChance) {
             children++;
             GameObject go = Instantiate(reproducePf, this.transform.position, Quaternion.identity);
-            go.GetComponent<Tunnel>().Init(currentCell, dir);
+            if (go.GetComponent<Node>()) go.GetComponent<Node>().Init(currentCell, dir);
+            if (go.GetComponent<Agent>()) go.GetComponent<Agent>().Init(currentCell, this.id + 1);
             SimulationManager.Instance.AgentReproduce(this, go);
         }
     }
@@ -150,7 +151,7 @@ public class Agent : AbstractAgent
             ReduceLife();
         }
         foreach (Cell cell in movePath) {
-            PlaceTunnel(cell);
+            PlaceNode(cell);
         }
     }
 
@@ -206,13 +207,9 @@ public class Agent : AbstractAgent
         }
     }
 
-    void PlaceTunnel(Cell cell) {
+    void PlaceNode(Cell cell) {
         GameObject go = Instantiate(instantiatePf, cell.transform.position, Quaternion.identity, pathParent.transform);
-        Tunnel tunnel = go.GetComponent<Tunnel>();
-        print(go);
-        print(tunnel);
-        print(cell);
-        print(dir);
+        Node tunnel = go.GetComponent<Node>();
         tunnel.Init(cell, dir);
         path.Add(tunnel);
     }

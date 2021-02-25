@@ -9,6 +9,7 @@ using ABMU.Core;
 public class AgentController : AbstractController
 {
     [Header("Agent Variables")]
+    public Spawn spawn;
     public GameObject agentPf;
     public LayerMask agentLm;
     List<Agent> agentsList = new List<Agent>();
@@ -19,6 +20,7 @@ public class AgentController : AbstractController
     public int iterations = 5;
     public System.Random rand;
     Cell[] cells;
+
 
     void Start() {
         cells = SimulationManager.Instance.cells;

@@ -8,7 +8,7 @@ public class Cell : MonoBehaviour
     public Vector3Int coords;
     public bool occupied = false;
     public AbstractAgent occupier;
-    public Tunnel tunnel;
+    public Node tunnel;
     public Cell[] neighbors;
 
     public List<Cell> GetCellNeighbors(int size = 1, bool findNeighbors = true) {

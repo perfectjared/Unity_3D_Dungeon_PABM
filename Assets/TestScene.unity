@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Gay
+  m_Text: 
 --- !u!222 &47901983
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -398,14 +398,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef61d0b1ac4ad44db342987fd1b77e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomSeed: -1251411328
-  randomStart: 1
+  randomSeed: -244423488
+  randomStart: 0
   environmentCellPf: {fileID: 5457209898911150162, guid: 69358f3b1d3580e4399b6bfad737389e,
     type: 3}
   cellLm:
     serializedVersion: 2
     m_Bits: 1024
-  environmentExtents: {x: 20, y: 10, z: 20}
+  environmentExtents: {x: 20, y: 30, z: 20}
   cellSizeInWorld: 20
   cells: []
 --- !u!4 &1121506043
