@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using ABMU.Core;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 //RN: move generate environment to SimulationManager
 
 public class AgentController : AbstractController
 {
     [Header("Agent Variables")]
-    public Spawn spawn;
+    public List<Spawn> spawn;
     public GameObject agentPf;
     public LayerMask agentLm;
     List<Agent> agentsList = new List<Agent>();
@@ -74,3 +76,14 @@ public class AgentController : AbstractController
         return c;
     }
 }
+
+#if UNITY_EDITOR
+public class AgentControllerEditor : Editor {
+    public override void OnInspectorGUI() {
+        AgentController ac = (AgentController)target;
+        
+        serializedObject.Update();
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+#endif
