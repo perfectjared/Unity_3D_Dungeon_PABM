@@ -1,17 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ABMU.Core;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-//RN: move generate environment to SimulationManager
+using NaughtyAttributes;
 
 public class AgentController : AbstractController
 {
     [Header("Agent Variables")]
-    public List<Spawn> spawn;
+    public AgentSpawnList agentSpawnList;
     public GameObject agentPf;
     public LayerMask agentLm;
     List<Agent> agentsList = new List<Agent>();
@@ -75,15 +72,29 @@ public class AgentController : AbstractController
 
         return c;
     }
-}
 
-#if UNITY_EDITOR
-public class AgentControllerEditor : Editor {
-    public override void OnInspectorGUI() {
-        AgentController ac = (AgentController)target;
-        
-        serializedObject.Update();
-        serializedObject.ApplyModifiedProperties();
-    }
+    public class AgentSpawnList : MonoBehaviour {
+        [System.Serializable]
+        public class AgentSpawn {
+            public GameObject agentPf;
+            public LayerMask layerMask;
+            [Range(1, 100)]
+            public int  iterations;
+
+            [Range(0, 100)]
+            public int step;
+            public bool wait;
+
+            public SpawnTypes spawnType;
+
+            public Vector3Int point;
+
+            public enum SpawnTypes {
+                Random,
+                Last,
+                Point
+            }
+        }
+        public List<AgentSpawn> agentSpawnList = new List<AgentSpawn>(1);
+    }   
 }
-#endif

@@ -437,6 +437,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSimulationPaused: 0
   endFrame: -1
+  agentSpawns:
+  - {fileID: 0}
   agentPf: {fileID: 6060351073144134256, guid: 74b3cef83dbbc754799bc991a4c9462f, type: 3}
   agentLm:
     serializedVersion: 2
