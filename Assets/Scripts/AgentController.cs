@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using ABMU.Core;
 using NaughtyAttributes;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class AgentController : AbstractController
 {
@@ -72,29 +75,4 @@ public class AgentController : AbstractController
 
         return c;
     }
-
-    public class AgentSpawnList : MonoBehaviour {
-        [System.Serializable]
-        public class AgentSpawn {
-            public GameObject agentPf;
-            public LayerMask layerMask;
-            [Range(1, 100)]
-            public int  iterations;
-
-            [Range(0, 100)]
-            public int step;
-            public bool wait;
-
-            public SpawnTypes spawnType;
-
-            public Vector3Int point;
-
-            public enum SpawnTypes {
-                Random,
-                Last,
-                Point
-            }
-        }
-        public List<AgentSpawn> agentSpawnList = new List<AgentSpawn>(1);
-    }   
 }

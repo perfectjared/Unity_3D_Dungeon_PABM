@@ -96,18 +96,9 @@ public class AgentSpawnListEditor : Editor {
             EditorGUILayout.PropertyField(point);
 
             if (GUILayout.Button("Remove Agent " + i.ToString())) thisList.DeleteArrayElementAtIndex(i);
-
         }
         
         objTarget.ApplyModifiedProperties();
-        /*spawn.agentPf = (GameObject)EditorGUILayout.ObjectField("Agent Prefab", spawn.agentPf, typeof(GameObject), false);
-        spawn.layerMask = EditorGUILayout.LayerField("Layer Mask", spawn.layerMask);
-        spawn.iterations = EditorGUILayout.IntSlider("Iterations", spawn.iterations, 0, 100);
-        spawn.step = EditorGUILayout.IntSlider("Step", spawn.step, 1, 100);
-        spawn.wait = EditorGUILayout.Toggle("Wait", spawn.wait);
-        spawn.spawnType = (AgentSpawn.SpawnTypes)EditorGUILayout.EnumPopup("AgentSpawn Type", spawn.spawnType);
-        if (spawn.spawnType != AgentSpawn.SpawnTypes.Random) spawn.point = EditorGUILayout.Vector3IntField("AgentSpawn Point", spawn.point);*/
-
     }
 }
 #endif

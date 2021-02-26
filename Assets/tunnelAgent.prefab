@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overlap: 0
-  life: 77
+  life: 158
   distMod: 2
   xzChance: 0.85
   xzDist:

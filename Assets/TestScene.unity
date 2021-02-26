@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 1121506043}
   - component: {fileID: 1121506042}
   - component: {fileID: 1121506044}
+  - component: {fileID: 1121506045}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -399,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomSeed: -244423488
-  randomStart: 0
+  randomStart: 1
   environmentCellPf: {fileID: 5457209898911150162, guid: 69358f3b1d3580e4399b6bfad737389e,
     type: 3}
   cellLm:
@@ -437,13 +438,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSimulationPaused: 0
   endFrame: -1
-  agentSpawns:
-  - {fileID: 0}
+  agentSpawnList: {fileID: 1121506045}
   agentPf: {fileID: 6060351073144134256, guid: 74b3cef83dbbc754799bc991a4c9462f, type: 3}
   agentLm:
     serializedVersion: 2
     m_Bits: 512
   iterations: 5
+--- !u!114 &1121506045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121506041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52c6a21e5b739c4599f22920e2bcb3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentSpawnList: []
 --- !u!1 &1340664278
 GameObject:
   m_ObjectHideFlags: 0
