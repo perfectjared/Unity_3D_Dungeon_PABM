@@ -104,7 +104,6 @@ public class Agent : AbstractAgent
 
     void Move() {
         if (!alive) {
-            print("test");
             this.enabled = false;
             return;
         }

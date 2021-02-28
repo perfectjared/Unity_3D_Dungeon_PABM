@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b4734d3147280e4b9fb9dbc588c7962, type: 2}
+  - {fileID: 2100000, guid: 53bcce42a0ffcb84297688b8dc8b81dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9703989440795e41929df66c624f186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOccupied: 0
+  coords: {x: 0, y: 0, z: 0}
+  occupied: 0
   occupier: {fileID: 0}
+  tunnel: {fileID: 0}
   neighbors: []
