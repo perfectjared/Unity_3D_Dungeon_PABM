@@ -1,7 +1,3 @@
-
-
-https://user-images.githubusercontent.com/26883388/109431332-e357eb80-79ba-11eb-998d-5d58526e2657.mp4
-
 # ABM_map
 ###### Unity 3D Implementation of parameterized agent-based modeling for 3D "Metroidvania"-style map design
 
@@ -52,3 +48,4 @@ https://user-images.githubusercontent.com/26883388/109431332-e357eb80-79ba-11eb-
 ![image](https://user-images.githubusercontent.com/26883388/109430943-ab4fa900-79b8-11eb-9d9c-f3b54f74d927.png)
 
 ## Overview
+https://user-images.githubusercontent.com/26883388/109431332-e357eb80-79ba-11eb-998d-5d58526e2657.mp4
