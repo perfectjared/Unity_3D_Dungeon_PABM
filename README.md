@@ -1,4 +1,4 @@
-# ABM_map
+# Unity 3D Dungeon PABM (Parameterized Agent-Based Modeling)
 ###### Unity 3D Implementation of parameterized agent-based modeling for 3D "Metroidvania"-style map design
 *This project was produced for the completion of the Computational Media Research (CMPM 202) class at University of California, Santa Cruz*
 
