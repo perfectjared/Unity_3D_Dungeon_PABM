@@ -1,6 +1,13 @@
 # ABM_map
 ###### Unity 3D Implementation of parameterized agent-based modeling for 3D "Metroidvania"-style map design
 
+## Credit
+- [Jared Pettitt](jpettittATucsc.edu)
+- [Celeste Jewett](rjewettATucsc.edu)
+
+## Extends
+- [Unity ABMU](https://github.com/cheliotk/unity_abm_framework)
+
 ## How to Use 
 1. Open the ABM_map project using Unity 2018
 2. Open the PABM.unity scene
