@@ -3,21 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ABMU.Core;
-
-//todo: the prefab thing
-//"continuity" - how likely is an agent to be created by splitting off another agent?
-// this is to create intersections !
-// perhaps at certain turns (not up/down) add to a list of potential split points?
-// another idea: a parameter making it so that it can only move in even or odd numbers
-// ^ this will affect adjacency! evens mean nothing right next to each other !
-// ^ YOU HAVE TO MAKE SPAWNING ONLY HAPPEN ON EVENS/ODDS TOO !!!
-// have branches able to join w another path & then die!
-//but first: you have to take care of yourself. eat ! and splash your face! wash some dishes!
-//i love you !!
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class Agent : AbstractAgent
 {
-    [Header("Parameters")]
+    [Header("Movement Parameters")]
     public bool overlap;
     [Range(1, 500)]
     public int life = 20;
@@ -37,7 +29,7 @@ public class Agent : AbstractAgent
     int yAmplitude;
     float dirChance;
 
-    [Header("Instatiate")]
+    [Header("Instatiation Parameters")]
     public GameObject instantiatePf;
     [Range(0f, 1f)]
     public float reproduceChance = 0.1f;
@@ -45,10 +37,6 @@ public class Agent : AbstractAgent
     [HideInInspector]
     public int children = 0;
     public GameObject reproducePf;
-
-   //[Header("Agent-Environment Interactions")]
-
-   // [Header("Agent-Agent Interactions")]
 
    [Header("Runtime")]
    public bool alive = true;
@@ -92,7 +80,6 @@ public class Agent : AbstractAgent
         random = new System.Random((int)(randomSeed / id));
 
         this.transform.localScale = Vector3.one * SimulationManager.Instance.cellSizeInWorld;
-        GetComponent<Renderer>().material.color = Color.red;
 
         //Code
         pathParent = new GameObject();
@@ -116,7 +103,11 @@ public class Agent : AbstractAgent
     }
 
     void Move() {
-        if (!alive) return;
+        if (!alive) {
+            print("test");
+            this.enabled = false;
+            return;
+        }
         float moveAxis = (float)random.NextDouble() * dirChance;
         int moveDistance = 0;
         AgentUtilities.Dir moveDirection = 0;
@@ -267,3 +258,77 @@ public class AgentUtilities {
     }
 
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(Agent))]
+public class AgentEditor : Editor {
+    Agent agent;
+    SerializedObject objTarget;
+    bool evenMovement = false;
+    int movementChance = 50;
+
+    void OnEnable() {
+        agent = (Agent)target;
+        objTarget = new SerializedObject(agent);
+    }
+    
+    public override void OnInspectorGUI() {
+        objTarget.Update();
+
+        SerializedProperty overlap = objTarget.FindProperty("overlap");
+        EditorGUILayout.PropertyField(overlap);
+
+        SerializedProperty life = objTarget.FindProperty("life");
+        EditorGUILayout.PropertyField(life);
+
+        evenMovement = EditorGUILayout.Toggle("Even Movement", evenMovement);
+        agent.distMod = evenMovement ? 2 : 1;
+        
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
+        movementChance = EditorGUILayout.IntSlider("XZ / Y Movement %", movementChance, 1, 100);
+        agent.xzChance = (float)movementChance / 100;
+        agent.yChance = 1 - ((float)movementChance / 100);
+
+        EditorGUILayout.Space();
+
+        SerializedProperty xzDist = objTarget.FindProperty("xzDist");
+        EditorGUILayout.PropertyField(xzDist, new GUIContent("X/Z Movement"));
+        EditorGUILayout.BeginHorizontal();
+        SerializedProperty xzDistFloor = objTarget.FindProperty("xzDistFloor");
+        EditorGUILayout.PropertyField(xzDistFloor, new GUIContent("Floor"));
+        SerializedProperty xzDistCeil = objTarget.FindProperty("xzDistCeil");
+        EditorGUILayout.PropertyField(xzDistCeil, new GUIContent("Ceiling"));
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space();
+
+        SerializedProperty yDist = objTarget.FindProperty("yDist");
+        EditorGUILayout.PropertyField(yDist, new GUIContent("Y Movement"));
+        EditorGUILayout.BeginHorizontal();
+        SerializedProperty yDistFloor = objTarget.FindProperty("yDistFloor");
+        EditorGUILayout.PropertyField(yDistFloor, new GUIContent("Floor"));
+        SerializedProperty yDistCeil = objTarget.FindProperty("yDistCeil");
+        EditorGUILayout.PropertyField(yDistCeil, new GUIContent("Ceiling"));
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
+        SerializedProperty instantiatePf = objTarget.FindProperty("instantiatePf");
+        EditorGUILayout.PropertyField(instantiatePf, new GUIContent("Path prefab"));
+        SerializedProperty reproducePf = objTarget.FindProperty("reproducePf");
+        EditorGUILayout.PropertyField(reproducePf, new GUIContent("Reproduction prefab"));
+        SerializedProperty reproduceChance = objTarget.FindProperty("reproduceChance");
+        EditorGUILayout.PropertyField(reproduceChance, new GUIContent("Reproduce chance"));
+        SerializedProperty reproduceSameLife = (objTarget.FindProperty("reproduceSameLife"));
+        EditorGUILayout.PropertyField(reproduceSameLife, new GUIContent("Child has same life"));
+
+
+
+        objTarget.ApplyModifiedProperties();
+    }
+}
+#endif

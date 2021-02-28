@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ABMU.Core;
-using NaughtyAttributes;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -17,10 +16,6 @@ public class AgentSpawnList : MonoBehaviour {
         public LayerMask layerMask;
         [Range(1, 100)]
         public int  iterations;
-
-        [Range(0, 100)]
-        public int step;
-        public bool wait;
 
         public SpawnTypes spawnType;
 
@@ -82,16 +77,12 @@ public class AgentSpawnListEditor : Editor {
             SerializedProperty agentPf = listRef.FindPropertyRelative("agentPf");
             SerializedProperty layerMask = listRef.FindPropertyRelative("layerMask");
             SerializedProperty iterations = listRef.FindPropertyRelative("iterations");
-            SerializedProperty step = listRef.FindPropertyRelative("step");
-            SerializedProperty wait = listRef.FindPropertyRelative("wait");
             SerializedProperty spawnType = listRef.FindPropertyRelative("spawnType");
             SerializedProperty point = listRef.FindPropertyRelative("point");
 
             EditorGUILayout.PropertyField(agentPf);
             EditorGUILayout.PropertyField(layerMask);
             EditorGUILayout.PropertyField(iterations);
-            EditorGUILayout.PropertyField(step);
-            EditorGUILayout.PropertyField(wait);
             EditorGUILayout.PropertyField(spawnType);
             EditorGUILayout.PropertyField(point);
 

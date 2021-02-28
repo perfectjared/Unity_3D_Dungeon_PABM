@@ -3,28 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ABMU.Core;
-using NaughtyAttributes;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
+[RequireComponent(typeof(AgentSpawnList))]
 public class AgentController : AbstractController
 {
-    [Header("Agent Variables")]
-    public AgentSpawnList agentSpawnList;
-    public GameObject agentPf;
-    public LayerMask agentLm;
+    List<AgentSpawnList.AgentSpawn> agentSpawnList;
     List<Agent> agentsList = new List<Agent>();
-
-    [Header("Simulation Variables")]
-    private int randomSeed;
-    [Range(1, 100)]
-    public int iterations = 5;
-    public System.Random rand;
+    int randomSeed;
+    System.Random rand;
     Cell[] cells;
+    int step;
 
 
     void Start() {
+        agentSpawnList = GetComponent<AgentSpawnList>().agentSpawnList;
         cells = SimulationManager.Instance.cells;
 
         randomSeed = SimulationManager.Instance.randomSeed;
@@ -36,6 +31,7 @@ public class AgentController : AbstractController
     public override void Step() {
         int agentsDone = 0;
         base.Step();
+        if (step >= agentSpawnList.Count) return;
 
         foreach(Agent agent in agentsList) {
             if (!agent.alive) agentsDone++;
@@ -43,19 +39,20 @@ public class AgentController : AbstractController
 
 
         if (agentsDone == agentsList.Count) {
-            if (iterations == 0) return;
-            GenerateAgent();
-            //EditorApplication.isPaused = true;
+            if (agentSpawnList[step].iterations == 0) step++;
+            else {
+                GenerateAgent();
+                agentSpawnList[step].iterations--;
+            }
         }
     }
 
     void GenerateAgent() {
-        GameObject pf = Instantiate(agentPf);
+        GameObject pf = Instantiate(agentSpawnList[step].agentPf);
         Agent agent = pf.GetComponent<Agent>();
         Cell cell = FindFreeCell();
         agent.Init(cell, agentsList.Count + 1);
         agentsList.Add(agent);
-        iterations--;
     }
 
     public void AgentReproduce(Agent parent, GameObject pfChangs) {
